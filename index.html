@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glam AI - Virtual Try-On | Maybelline</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation@0.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.11.0"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">✨ Glam AI</div>
+            <h1>Virtual Try-On</h1>
+            <p>Discover Your Perfect Look</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Step 1: Image Input Selection -->
+            <section id="input-section" class="section active">
+                <h2>Choose Your Input Method</h2>
+                <div class="button-group">
+                    <button class="btn btn-primary" id="selfie-btn">📷 Take Selfie</button>
+                    <button class="btn btn-primary" id="upload-btn">📁 Upload Image</button>
+                </div>
+                <input type="file" id="image-upload" accept="image/*" hidden>
+            </section>
+
+            <!-- Step 2: Selfie/Upload Preview -->
+            <section id="preview-section" class="section">
+                <h2>Your Photo</h2>
+                <div class="preview-container">
+                    <video id="camera-video" autoplay playsinline></video>
+                    <canvas id="canvas" hidden></canvas>
+                    <img id="preview-image" hidden>
+                </div>
+                <div class="preview-actions">
+                    <button class="btn btn-success" id="capture-btn" hidden>📸 Capture</button>
+                    <button class="btn btn-secondary" id="retake-btn" hidden>🔄 Retake</button>
+                    <button class="btn btn-success" id="confirm-btn" hidden>✓ Confirm</button>
+                </div>
+            </section>
+
+            <!-- Step 3: Category Selection -->
+            <section id="category-section" class="section">
+                <h2>Select Category</h2>
+                <div class="category-grid">
+                    <div class="category-card" data-category="makeup">
+                        <div class="icon">💄</div>
+                        <h3>Makeup</h3>
+                    </div>
+                    <div class="category-card" data-category="jewelry">
+                        <div class="icon">💎</div>
+                        <h3>Jewelry</h3>
+                    </div>
+                    <div class="category-card" data-category="dress">
+                        <div class="icon">👗</div>
+                        <h3>Dress</h3>
+                    </div>
+                    <div class="category-card" data-category="footwear">
+                        <div class="icon">👠</div>
+                        <h3>Footwear</h3>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 4: Sub-Category Selection -->
+            <section id="subcategory-section" class="section">
+                <button class="btn btn-back" id="back-to-category">← Back</button>
+                <h2 id="subcategory-title">Select Product Type</h2>
+                <div class="subcategory-grid" id="subcategory-grid"></div>
+            </section>
+
+            <!-- Step 5: Product Selection -->
+            <section id="product-section" class="section">
+                <button class="btn btn-back" id="back-to-subcategory">← Back</button>
+                <h2 id="product-title">Choose Product</h2>
+                <div class="product-grid" id="product-grid"></div>
+            </section>
+
+            <!-- Step 6: Virtual Try-On & Preview -->
+            <section id="tryon-section" class="section">
+                <button class="btn btn-back" id="back-to-product">← Back</button>
+                <h2>Your Virtual Look</h2>
+                <div class="tryon-container">
+                    <canvas id="tryon-canvas"></canvas>
+                </div>
+                <div class="tryon-info">
+                    <h3 id="product-name"></h3>
+                    <p id="product-description"></p>
+                    <p id="product-code"></p>
+                    <p id="recommendation"></p>
+                </div>
+                <div class="tryon-actions">
+                    <button class="btn btn-primary" id="continue-btn">+ Add More Products</button>
+                    <button class="btn btn-success" id="save-btn">💾 Save Look</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/face-detection.js"></script>
+    <script src="js/product-data.js"></script>
+    <script src="js/tryon-engine.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
